@@ -47,6 +47,10 @@ class Game:
 
             if key == ord('q'):
                 break
+            elif key == ord('p'):
+                self.stdscr.timeout(-1)
+                self.write_center("Game Paused. Enter anything to resume.\n")
+                self.stdscr.getch()
 
             self.find_velocity(key)
 
@@ -67,17 +71,18 @@ class Game:
 
             self.stdscr.timeout(100)
 
-        self.stdscr.move(self.max_y // 2, self.max_x // 2)
-        text = "Game Over\n"
+        self.write_center("Game Over\n")
+
+        curses.napms(1000)
+        curses.endwin()
+
+    def write_center(self, text):
         self.stdscr.addstr(
             self.max_y // 2,
             self.max_x // 2 - len(text) // 2,
             text
         )
         self.stdscr.refresh()
-
-        curses.napms(1000)
-        curses.endwin()
 
     def slide_snake(self):
         if self.x_pos <= 1 and self.x_vel < 0:  # Left
