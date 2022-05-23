@@ -128,4 +128,4 @@ class Game:
         self.apple_entity.draw()
         self.snake_entity.draw()
 
-        self.stdscr.addstr(0, 0, f"Score: {self.score}")
+        self.stdscr.addstr(self.max_y + 1, 0, f"Score: {self.score}")
