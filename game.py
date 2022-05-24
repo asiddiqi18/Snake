@@ -5,7 +5,7 @@ from snake import Snake
 
 VERTICAL_LEAP = 1
 HORIZONTAL_LEAP = 2
-INIT_BONUS_LENGTH = 5
+INIT_BONUS_LENGTH = 0
 
 
 class Game:
@@ -29,6 +29,8 @@ class Game:
 
         self.apple_entity = Apple(self.stdscr)
         self.apple_entity.create(self.snake_entity, self.max_x, self.max_y)
+
+        self.bonuses_added_length = INIT_BONUS_LENGTH
 
     def setup_curses(self):
         curses.curs_set(0)
@@ -60,6 +62,9 @@ class Game:
 
             if self.snake_entity.was_hit_by_apple(self.apple_entity):
                 self.apple_entity.create(self.snake_entity, self.max_x, self.max_y)
+                self.score += 1
+            elif self.bonuses_added_length:
+                self.bonuses_added_length -= 1
                 self.score += 1
             else:
                 self.snake_entity.slide()
