@@ -3,7 +3,9 @@ import curses
 from apple import Apple
 from snake import Snake
 
+VERTICAL_LEAP = 1
 HORIZONTAL_LEAP = 2
+INIT_BONUS_LENGTH = 5
 
 
 class Game:
@@ -69,7 +71,7 @@ class Game:
             if self.snake_entity.was_hit_by_itself():
                 break
 
-            self.stdscr.timeout(100)
+            self.stdscr.timeout(65)
 
         self.write_center("Game Over\n")
 
@@ -104,12 +106,12 @@ class Game:
         if key == curses.KEY_UP:
             if self.y_vel > 0:
                 return
-            self.y_vel = -1
+            self.y_vel = -VERTICAL_LEAP
             self.x_vel = 0
         elif key == curses.KEY_DOWN:
             if self.y_vel < 0:
                 return
-            self.y_vel = 1
+            self.y_vel = VERTICAL_LEAP
             self.x_vel = 0
         elif key == curses.KEY_LEFT:
             if self.x_vel > 0:
