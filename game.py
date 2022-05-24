@@ -21,6 +21,9 @@ class Game:
         self.max_x -= 2
         self.max_y -= 2
 
+        if self.x_pos & 1:
+            self.x_pos += 1
+
         self.y_vel = 0
         self.score = 0
 
