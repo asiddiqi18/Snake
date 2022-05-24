@@ -13,11 +13,12 @@ class Apple:
         apple_tile = Tile.random(max_x, max_y)
 
         while True:
-            for tile in snake.tiles:
+            for tile in snake.tiles[:-1]:
                 if tile == self.apple_tile:
                     apple_tile = Tile.random(max_x, max_y)
                     break
-            break
+            else:
+                break
 
         self.apple_tile = apple_tile
 
